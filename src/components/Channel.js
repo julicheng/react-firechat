@@ -33,7 +33,6 @@ export default function Channel({ user = null, db = null, auth = null }) {
             ...doc.data(),
             id: doc.id,
           }));
-          console.log(data);
           setMessages(data);
         });
 

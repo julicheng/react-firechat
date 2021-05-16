@@ -8,9 +8,8 @@ export default function Message({
   photoURL = '',
   sent = false,
 }) {
-  console.log(sent);
   return (
-    <div>
+    <div style={{ background: `${sent ? `pink` : `turquoise`}` }}>
       {photoURL ? <img src={photoURL} alt='avatar' width={45} /> : null}
       {displayName ? <p>{displayName}</p> : null}
       {createdAt?.seconds ? (
