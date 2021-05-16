@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // components
 import Button from './components/Button';
+import Channel from './components/Channel';
 // firebase deps
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -17,6 +18,7 @@ firebase.initializeApp({
 });
 
 const auth = firebase.auth();
+const db = firebase.firestore();
 
 function App() {
   const [user, setUser] = useState(() => auth.currentUser);
@@ -30,7 +32,7 @@ function App() {
     if (initalizing) setInitalizing(false);
     // cleanup subscription
     return unsubscribe;
-  }, []);
+  }, [initalizing]);
 
   const signInWithGoogle = async () => {
     // retrieve google provider object
@@ -60,7 +62,7 @@ function App() {
       {user ? (
         <>
           <Button onClick={signOut}>Sign out</Button>
-          <p>'Welcome to the chat'</p>
+          <Channel user={user} db={db} />
         </>
       ) : (
         <Button onClick={signInWithGoogle}>Sign in with Google</Button>
