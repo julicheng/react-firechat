@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import Message from './Message';
 
-export default function Channel({ user = null, db = null }) {
+export default function Channel({ user = null, db = null, auth = null }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
@@ -47,7 +47,7 @@ export default function Channel({ user = null, db = null }) {
       <ul>
         {messages.map((message) => (
           <li key={message.id}>
-            <Message {...message} />
+            <Message {...message} sent={message.uid === auth.currentUser.uid} />
           </li>
         ))}
       </ul>

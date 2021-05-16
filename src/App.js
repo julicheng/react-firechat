@@ -62,7 +62,7 @@ function App() {
       {user ? (
         <>
           <Button onClick={signOut}>Sign out</Button>
-          <Channel user={user} db={db} />
+          <Channel user={user} db={db} auth={auth} />
         </>
       ) : (
         <Button onClick={signInWithGoogle}>Sign in with Google</Button>

@@ -6,7 +6,9 @@ export default function Message({
   text = '',
   displayName = '',
   photoURL = '',
+  sent = false,
 }) {
+  console.log(sent);
   return (
     <div>
       {photoURL ? <img src={photoURL} alt='avatar' width={45} /> : null}
