@@ -41,7 +41,15 @@ function App() {
     try {
       await auth.signInWithPopup(provider);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    }
+  };
+
+  const signOut = async () => {
+    try {
+      await firebase.auth().signOut();
+    } catch (error) {
+      console.error(error.message);
     }
   };
 
@@ -50,7 +58,10 @@ function App() {
   return (
     <div>
       {user ? (
-        'Welcome to the chat'
+        <>
+          <Button onClick={signOut}>Sign out</Button>
+          <p>'Welcome to the chat'</p>
+        </>
       ) : (
         <Button onClick={signInWithGoogle}>Sign in with Google</Button>
       )}
