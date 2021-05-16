@@ -1,7 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import firebase from 'firebase/app';
 
 export default function Channel({ user = null, db = null }) {
   const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
+
+  const { uid, displayName, photoURL } = user;
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    if (db) {
+      db.collection('messages').add({
+        text: newMessage,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        uid,
+        displayName,
+        photoURL,
+      });
+    }
+  };
 
   useEffect(() => {
     if (db) {
@@ -25,10 +42,23 @@ export default function Channel({ user = null, db = null }) {
   }, [db]);
 
   return (
-    <ul>
-      {messages.map((message) => (
-        <li key={message.id}>{message.text}</li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {messages.map((message) => (
+          <li key={message.id}>{message.text}</li>
+        ))}
+      </ul>
+      <form onSubmit={handleOnSubmit}>
+        <input
+          type='text'
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.currentTarget.value)}
+          placeholder='Type your message here...'
+        />
+        <button type='submit' disabled={!newMessage}>
+          Send
+        </button>
+      </form>
+    </>
   );
 }
