@@ -9,7 +9,8 @@ export default function Message({
   sent = false,
 }) {
   return (
-    <div style={{ background: `${sent ? `pink` : `turquoise`}` }}>
+    // <div style={{ background: `${sent ? `pink` : `turquoise`}` }}>
+    <div className={`${sent ? 'justify-end' : 'justify-start'} flex`}>
       {photoURL ? <img src={photoURL} alt='avatar' width={45} /> : null}
       {displayName ? <p>{displayName}</p> : null}
       {createdAt?.seconds ? (

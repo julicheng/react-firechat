@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+
 // components
 import Button from './components/Button';
 import Channel from './components/Channel';
+import Wrapper from './components/Wrapper';
+
 // firebase deps
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -58,14 +61,21 @@ function App() {
   if (initalizing) return 'Loading...';
 
   return (
-    <div>
+    <div className='container h-screen bg-gray-50 max-w-full flex flex-col justify-start items-center pt-10'>
       {user ? (
-        <>
-          <Button onClick={signOut}>Sign out</Button>
-          <Channel user={user} db={db} auth={auth} />
-        </>
+        <Button onClick={signOut}>Sign out</Button>
       ) : (
         <Button onClick={signInWithGoogle}>Sign in with Google</Button>
+      )}
+      {user ? (
+        <Wrapper>
+          <Channel user={user} db={db} auth={auth} />
+        </Wrapper>
+      ) : (
+        <Wrapper>
+          {/* <Button onClick={signInWithGoogle}>Sign in with Google</Button> */}
+          <p className='text-gray-400'>Please sign in to start chatting</p>
+        </Wrapper>
       )}
     </div>
   );

@@ -42,25 +42,33 @@ export default function Channel({ user = null, db = null, auth = null }) {
   }, [db]);
 
   return (
-    <>
-      <ul>
+    <div className='relative w-full h-full'>
+      <ul className='overflow-y-scroll'>
         {messages.map((message) => (
           <li key={message.id}>
             <Message {...message} sent={message.uid === auth.currentUser.uid} />
           </li>
         ))}
       </ul>
-      <form onSubmit={handleOnSubmit}>
+      <form
+        onSubmit={handleOnSubmit}
+        className='border border-black w-full absolute bottom-0'
+      >
         <input
+          className='w-4/5'
           type='text'
           value={newMessage}
           onChange={(e) => setNewMessage(e.currentTarget.value)}
           placeholder='Type your message here...'
         />
-        <button type='submit' disabled={!newMessage}>
+        <button
+          type='submit'
+          disabled={!newMessage}
+          className='border border-pink-400'
+        >
           Send
         </button>
       </form>
-    </>
+    </div>
   );
 }
