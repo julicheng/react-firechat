@@ -9,16 +9,23 @@ export default function Message({
   sent = false,
 }) {
   return (
-    // <div style={{ background: `${sent ? `pink` : `turquoise`}` }}>
-    <div className={`${sent ? 'justify-end' : 'justify-start'} flex`}>
-      {photoURL ? <img src={photoURL} alt='avatar' width={45} /> : null}
-      {displayName ? <p>{displayName}</p> : null}
+    <div
+      className={`${
+        sent ? 'justify-end bg-blue-400' : 'justify-start bg-green-400'
+      } flex text-white`}
+    >
+      <div>
+        {photoURL ? (
+          <img src={photoURL} alt='avatar' className='rounded-full w-8' />
+        ) : null}
+        {displayName ? <p>{displayName}</p> : null}
+      </div>
+      <p>{text}</p>
       {createdAt?.seconds ? (
         <span>
           {formatRelative(new Date(createdAt.seconds * 1000), new Date())}
         </span>
       ) : null}
-      <p>{text}</p>
     </div>
   );
 }
