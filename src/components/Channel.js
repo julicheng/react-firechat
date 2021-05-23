@@ -68,7 +68,9 @@ export default function Channel({ user = null, db = null, auth = null }) {
         <button
           type='submit'
           disabled={!newMessage}
-          className='text-center w-1/5 bg-green-300 text-white p-2 hover:bg-green-400 rounded-sm'
+          className={`${
+            newMessage ? 'bg-green-300' : 'bg-gray-300'
+          } text-center w-1/5 text-white p-2 rounded-sm focus:bg-green-400`}
         >
           Send
         </button>
