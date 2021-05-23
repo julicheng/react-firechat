@@ -45,13 +45,15 @@ export default function Channel({ user = null, db = null, auth = null }) {
   }, [db]);
 
   return (
-    <div className='relative w-full h-full'>
-      <div className='overflow-y-scrol w-full flex-col flex'>
-        {messages.map((message) => (
-          <Message {...message} sent={message.uid === auth.currentUser.uid} />
-        ))}
+    <>
+      <div className='relative w-full h-full overflow-y-scroll'>
+        <div className='w-full flex-col flex'>
+          {messages.map((message) => (
+            <Message {...message} sent={message.uid === auth.currentUser.uid} />
+          ))}
+        </div>
+        <div ref={ref}></div>
       </div>
-      <div ref={ref}></div>
       <form
         onSubmit={handleOnSubmit}
         className='w-full sticky bottom-0 bg-white'
@@ -66,11 +68,11 @@ export default function Channel({ user = null, db = null, auth = null }) {
         <button
           type='submit'
           disabled={!newMessage}
-          className=' text-center w-1/5 bg-green-300 text-white p-2 hover:bg-green-400 rounded-sm '
+          className='text-center w-1/5 bg-green-300 text-white p-2 hover:bg-green-400 rounded-sm'
         >
           Send
         </button>
       </form>
-    </div>
+    </>
   );
 }

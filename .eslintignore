@@ -1,8 +1,0 @@
-build/
-coverage/
-node_modules/
-public/
-config-overrides.js
-src/setupProxy.js
-*.test.ts
-*.test.tsx
