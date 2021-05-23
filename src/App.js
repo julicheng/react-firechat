@@ -73,7 +73,6 @@ function App() {
         </Wrapper>
       ) : (
         <Wrapper>
-          {/* <Button onClick={signInWithGoogle}>Sign in with Google</Button> */}
           <p className='text-gray-400'>Please sign in to start chatting</p>
         </Wrapper>
       )}

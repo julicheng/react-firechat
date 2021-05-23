@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import firebase from 'firebase/app';
 import Message from './Message';
 
 export default function Channel({ user = null, db = null, auth = null }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const ref = useRef(null);
 
   const { uid, displayName, photoURL } = user;
 
@@ -18,6 +19,7 @@ export default function Channel({ user = null, db = null, auth = null }) {
         displayName,
         photoURL,
       });
+      setNewMessage('');
     }
   };
 
@@ -34,6 +36,7 @@ export default function Channel({ user = null, db = null, auth = null }) {
             id: doc.id,
           }));
           setMessages(data);
+          ref.current.scrollIntoView();
         });
 
       // detach listener
@@ -45,17 +48,16 @@ export default function Channel({ user = null, db = null, auth = null }) {
     <div className='relative w-full h-full'>
       <div className='overflow-y-scrol w-full flex-col flex'>
         {messages.map((message) => (
-          // <li key={message.id}>
           <Message {...message} sent={message.uid === auth.currentUser.uid} />
-          // </li>
         ))}
       </div>
+      <div ref={ref}></div>
       <form
         onSubmit={handleOnSubmit}
-        className='border border-black w-full sticky bottom-0 '
+        className='w-full sticky bottom-0 bg-white'
       >
         <input
-          className='w-4/5'
+          className='w-4/5 p-2 focus:outline-none'
           type='text'
           value={newMessage}
           onChange={(e) => setNewMessage(e.currentTarget.value)}
@@ -64,7 +66,7 @@ export default function Channel({ user = null, db = null, auth = null }) {
         <button
           type='submit'
           disabled={!newMessage}
-          className='border border-pink-400'
+          className=' text-center w-1/5 bg-green-300 text-white p-2 hover:bg-green-400 rounded-sm '
         >
           Send
         </button>

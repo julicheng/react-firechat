@@ -12,7 +12,7 @@ export default function Message({
     <div
       className={`${
         sent ? 'self-end ' : 'self-start '
-      } bg-gray-50 my-2 mx-4 rounded-lg px-4 py-3 shadow-md max-w-sm`}
+      } bg-gray-50 m-2 rounded-lg px-4 py-3 shadow-md max-w-sm`}
     >
       <div className='flex justify-start items-center'>
         {photoURL ? (
