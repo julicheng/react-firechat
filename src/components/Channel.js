@@ -43,16 +43,16 @@ export default function Channel({ user = null, db = null, auth = null }) {
 
   return (
     <div className='relative w-full h-full'>
-      <ul className='overflow-y-scroll'>
+      <div className='overflow-y-scrol w-full flex-col flex'>
         {messages.map((message) => (
-          <li key={message.id}>
-            <Message {...message} sent={message.uid === auth.currentUser.uid} />
-          </li>
+          // <li key={message.id}>
+          <Message {...message} sent={message.uid === auth.currentUser.uid} />
+          // </li>
         ))}
-      </ul>
+      </div>
       <form
         onSubmit={handleOnSubmit}
-        className='border border-black w-full absolute bottom-0'
+        className='border border-black w-full sticky bottom-0 '
       >
         <input
           className='w-4/5'
